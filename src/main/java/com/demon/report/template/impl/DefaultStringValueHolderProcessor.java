@@ -32,7 +32,6 @@ public class DefaultStringValueHolderProcessor implements IValueHolderProcessor<
         String result = data;
         while (matcher.find()) {
             String currentHolder = matcher.group(0);
-            System.out.println("currentHolder:" + currentHolder);
             if(StringUtils.isNotBlank(currentHolder)){
                 String resolvedHolder = holderResolver.transform(currentHolder);
                 if(mapHoldersAndValues.containsKey(currentHolder)) {
