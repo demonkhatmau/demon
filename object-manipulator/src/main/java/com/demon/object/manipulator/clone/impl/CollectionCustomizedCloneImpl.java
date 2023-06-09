@@ -7,7 +7,7 @@ import com.demon.object.manipulator.exception.CustomizedCloneException;
 import java.util.Collection;
 
 public class CollectionCustomizedCloneImpl<M> implements ICustomizedClone<Collection<M>> {
-    private ICustomizedClone objectCustomizedClone = new ObjectCustomizedCloneImpl();
+    public static final CollectionCustomizedCloneImpl collectionCustomizedClone = new CollectionCustomizedCloneImpl();
 
     @Override
     public Collection<M> performCustomizedClone(Collection<M> source, boolean deepClone) throws CustomizedCloneException {
@@ -17,7 +17,7 @@ public class CollectionCustomizedCloneImpl<M> implements ICustomizedClone<Collec
                 if (!deepClone) {
                     finalResult.add(e);
                 } else {
-                    M clonedElement = (M) objectCustomizedClone.performCustomizedClone(e, true);
+                    M clonedElement = (M) ObjectCustomizedCloneImpl.objectCustomizedClone.performCustomizedClone(e, true);
                     finalResult.add(clonedElement);
                 }
             }

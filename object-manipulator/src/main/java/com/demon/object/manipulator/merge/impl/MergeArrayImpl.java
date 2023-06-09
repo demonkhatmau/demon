@@ -5,7 +5,7 @@ import com.demon.object.manipulator.exception.MergeObjectException;
 import com.demon.object.manipulator.merge.IMergeObject;
 
 public class MergeArrayImpl<M> implements IMergeObject<M[]> {
-    private IMergeObject<M> mergeObject = new MergeObjectImpl();
+    public static final MergeArrayImpl mergeArray = new MergeArrayImpl();
 
     @Override
     public M[] performMerge(M[] dest, M[] source) throws MergeObjectException {
@@ -23,7 +23,7 @@ public class MergeArrayImpl<M> implements IMergeObject<M[]> {
             M currentDest = i < destLen ? dest[i] : null;
             M currentSource = i < sourceLen ? source[i] : null;
             if (null != currentDest && null != currentSource) {
-                currentDest = mergeObject.performMerge(currentDest, currentSource);
+                currentDest = (M) MergeObjectImpl.mergeObject.performMerge(currentDest, currentSource);
                 tempArr[i] = currentDest;
             } else if (null != currentDest) {
                 tempArr[i] = currentDest;

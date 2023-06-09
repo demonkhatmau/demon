@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class MergeMapImpl<K, V> implements IMergeObject<Map<K, V>> {
     private Class<? extends Map> defaultMapClazz = HashMap.class;
-    private IMergeObject<V> mergeValue = new MergeObjectImpl<>();
+    public static final  MergeMapImpl mergeMap = new MergeMapImpl<>();
 
     @Override
     public Map<K, V> performMerge(Map<K, V> dest, Map<K, V> source) throws MergeObjectException {
@@ -37,7 +37,7 @@ public class MergeMapImpl<K, V> implements IMergeObject<Map<K, V>> {
                     tempMap.put(e.getKey(), e.getValue());
                 } else {
                     try {
-                        V mergedValue = mergeValue.performMerge(tempMap.get(e.getKey()), e.getValue());
+                        V mergedValue = (V) MergeObjectImpl.mergeObject.performMerge(tempMap.get(e.getKey()), e.getValue());
                         tempMap.put(e.getKey(), mergedValue);
                     } catch (MergeObjectException mergeObjectException) {
                     }

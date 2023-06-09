@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Data
 public class MergeCollectionImpl<M> implements IMergeObject<Collection<M>> {
     private Class<? extends Collection> defaultCollectionClazz = ArrayList.class;
-    private MergeArrayImpl mergeArr = new MergeArrayImpl();
+    public static final MergeCollectionImpl mergeCollection = new MergeCollectionImpl();
 
     @Override
     public Collection<M> performMerge(Collection<M> dest, Collection<M> source) throws MergeObjectException {
@@ -36,7 +36,7 @@ public class MergeCollectionImpl<M> implements IMergeObject<Collection<M>> {
 
         final Object[] destArr = dest.toArray();
         final Object[] sourceArr = source.toArray();
-        final Object[] result = mergeArr.performMerge(destArr, sourceArr);
+        final Object[] result = MergeArrayImpl.mergeArray.performMerge(destArr, sourceArr);
         final Constructor destDefaultConstructor = ReflectionUtils.getDefaultConstructor(dest);
         if (null == destDefaultConstructor) {
             return (Collection<M>) Arrays.stream(result).collect(Collectors.toList());

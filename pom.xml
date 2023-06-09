@@ -36,8 +36,8 @@
     </dependencyManagement>
 
     <modules>
-        <module>template</module>
         <module>commons</module>
+        <module>template</module>
         <module>object-manipulator</module>
     </modules>
 

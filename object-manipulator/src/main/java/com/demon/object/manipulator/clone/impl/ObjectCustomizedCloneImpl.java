@@ -11,10 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ObjectCustomizedCloneImpl<M> implements ICustomizedClone<M> {
-    private final static ObjectCustomizedCloneImpl objectCustomizedClone = new ObjectCustomizedCloneImpl();
-    private final static ArrayCustomizedCloneImpl arrayCustomizedClone = new ArrayCustomizedCloneImpl();
-    private final static CollectionCustomizedCloneImpl collectionCustomizedClone = new CollectionCustomizedCloneImpl();
-    private final static MapCustomizedCloneImpl mapCustomizedClone = new MapCustomizedCloneImpl();
+    public static final ObjectCustomizedCloneImpl objectCustomizedClone = new ObjectCustomizedCloneImpl();
 
     @Override
     public M performCustomizedClone(M source, boolean deepClone) throws CustomizedCloneException {
@@ -35,13 +32,13 @@ public class ObjectCustomizedCloneImpl<M> implements ICustomizedClone<M> {
                     if (ReflectionUtils.isPrimitiveWrapperOrString(type)) {
                         f.set(clonedResult, fieldValue);
                     } else if (ReflectionUtils.isArray(type)) {
-                        Object[] arrayResult = arrayCustomizedClone.performCustomizedClone((Object[]) source, true);
+                        Object[] arrayResult = ArrayCustomizedCloneImpl.arrayCustomizedClone.performCustomizedClone((Object[]) source, true);
                         f.set(clonedResult, arrayResult);
                     } else if (ReflectionUtils.isCollection(type)) {
-                        Collection collectionResult = collectionCustomizedClone.performCustomizedClone((Collection) source, true);
+                        Collection collectionResult = CollectionCustomizedCloneImpl.collectionCustomizedClone.performCustomizedClone((Collection) source, true);
                         f.set(clonedResult, collectionResult);
                     } else if (ReflectionUtils.isCMap(type)) {
-                        Map mapResult = mapCustomizedClone.performCustomizedClone((Map) source, true);
+                        Map mapResult = MapCustomizedCloneImpl.mapCustomizedClone.performCustomizedClone((Map) source, true);
                         f.set(clonedResult, mapResult);
                     } else {
                         Object objectResult = objectCustomizedClone.performCustomizedClone(source, true);

@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MergeObjectImpl<M> implements IMergeObject<M> {
-    private static MergeObjectImpl mergeObject = new MergeObjectImpl();
-    private static MergeArrayImpl mergeArray = new MergeArrayImpl();
-    private static MergeCollectionImpl mergeCollection = new MergeCollectionImpl();
-    private static MergeMapImpl mergeMap = new MergeMapImpl();
+    public static final MergeObjectImpl mergeObject = new MergeObjectImpl();
 
     @Override
     public M performMerge(M dest, M source) throws MergeObjectException {
@@ -30,13 +27,13 @@ public class MergeObjectImpl<M> implements IMergeObject<M> {
                         if (ReflectionUtils.isPrimitiveWrapperOrString(type)) {
                             f.set(dest, sourceValue);
                         } else if (ReflectionUtils.isCollection(type)) {
-                            Collection collectionResult = mergeCollection.performMerge((Collection) destValue, (Collection) sourceValue);
+                            Collection collectionResult = MergeCollectionImpl.mergeCollection.performMerge((Collection) destValue, (Collection) sourceValue);
                             f.set(dest, collectionResult);
                         } else if (ReflectionUtils.isArray(type)) {
-                            Object[] arrayResult = mergeArray.performMerge((Object[]) destValue, (Object[]) sourceValue);
+                            Object[] arrayResult = MergeArrayImpl.mergeArray.performMerge((Object[]) destValue, (Object[]) sourceValue);
                             f.set(dest, arrayResult);
                         } else if (ReflectionUtils.isMap(type)) {
-                            Map<?, ?> mapResult = mergeMap.performMerge((Map) destValue, (Map) sourceValue);
+                            Map<?, ?> mapResult = MergeMapImpl.mergeMap.performMerge((Map) destValue, (Map) sourceValue);
                             f.set(dest, mapResult);
                         } else {
                             Object objectResult = mergeObject.performMerge(destValue, sourceValue);
