@@ -3,9 +3,11 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.demon</groupId>
-    <artifactId>template</artifactId>
+    <artifactId>profile</artifactId>
     <version>1.0.0</version>
+
     <properties>
         <java.version>1.8</java.version>
         <lombok.version>1.16.20</lombok.version>
@@ -29,10 +31,6 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-collections4</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -40,6 +38,20 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.demon</groupId>
+            <artifactId>config</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.demon</groupId>
+            <artifactId>template</artifactId>
+            <version>1.0.0</version>
         </dependency>
     </dependencies>
 
@@ -63,4 +75,6 @@
             </plugin>
         </plugins>
     </build>
+
+
 </project>

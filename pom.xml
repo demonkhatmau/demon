@@ -10,8 +10,10 @@
     <properties>
         <java.version>1.8</java.version>
         <commons-lang3.version>3.12.0</commons-lang3.version>
+        <commons-io.version>2.13.0</commons-io.version>
         <lombok.version>1.16.20</lombok.version>
         <org.slf4j.version>2.0.7</org.slf4j.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -32,12 +34,27 @@
                 <artifactId>slf4j-simple</artifactId>
                 <version>${org.slf4j.version}</version>
             </dependency>
+            <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-collections4 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
     <modules>
         <module>commons</module>
         <module>template</module>
+        <module>config</module>
+        <module>profile</module>
         <module>object-manipulator</module>
     </modules>
 
@@ -62,5 +79,19 @@
                 </plugin>
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>8.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>
